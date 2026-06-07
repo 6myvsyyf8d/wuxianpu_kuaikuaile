@@ -25,7 +25,7 @@ import type { UserProfile } from "../../shared/user/types";
 import { ensureDefaultUser, getActiveUser } from "../../shared/user/UserManager";
 
 // ─── Module imports ───
-import { playNoteSound, playChordSound, initAudio } from "./audio";
+import { playNoteSound, playChordSound, playSuccessSound, playErrorSound, initAudio } from "./audio";
 import {
   getLevelConfig,
   generateCampaignRound,
@@ -445,6 +445,7 @@ export default function SightReadingModule({ onModuleChange }: Props) {
           } else if (q.noteId) {
             playNoteSound(q.noteId);
           }
+          playSuccessSound();
         } catch {
           // Sound failure is non-blocking
         }
@@ -458,6 +459,11 @@ export default function SightReadingModule({ onModuleChange }: Props) {
           advance(qIdx + 1, newScore, newCorrect);
         }, 700);
       } else {
+        try {
+          playErrorSound();
+        } catch {
+          // Sound failure is non-blocking
+        }
         setFeedback("wrong");
         setStreak(0);
 
