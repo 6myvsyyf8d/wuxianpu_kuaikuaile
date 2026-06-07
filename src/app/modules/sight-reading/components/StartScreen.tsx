@@ -333,7 +333,8 @@ export default function StartScreen({
                         borderRadius: 8,
                       }}
                     >
-                      🏰 闯关模式
+                      <span className="inline-block mr-1">🏰</span>
+                      闯关模式
                     </span>
                     <span
                       className="px-2.5 py-1"
@@ -345,7 +346,8 @@ export default function StartScreen({
                         borderRadius: 8,
                       }}
                     >
-                      🎹 自由练习
+                      <span className="inline-block mr-1">🎹</span>
+                      自由练习
                     </span>
                   </div>
                 </div>
@@ -585,9 +587,8 @@ export default function StartScreen({
                       animate={{ scale: [1, 1.05, 1], rotate: [0, 3, -3, 0] }}
                       transition={{ repeat: Infinity, duration: 2.5 }}
                       className="flex-shrink-0"
-                      style={{ fontSize: 72 }}
                     >
-                      🏰
+                      <span style={{ fontSize: 72 }}>🏰</span>
                     </motion.div>
                     <div className="flex-1">
                       <div
@@ -600,7 +601,8 @@ export default function StartScreen({
                           letterSpacing: 0.5,
                         }}
                       >
-                        ✨ 推荐模式
+                        <span className="inline-block mr-1">✨</span>
+                        推荐模式
                       </div>
                       <div style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 2 }}>
                         闯关模式
@@ -648,23 +650,62 @@ export default function StartScreen({
 
                   {/* Feature tags */}
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {["🗺️ 主题地图", "🎭 角色收集", "⭐ 三星评分", "🏆 成就解锁"].map((tag, i) => (
-                      <motion.span
-                        key={tag}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 + i * 0.05 }}
-                        className="px-2.5 py-1 rounded-full"
-                        style={{
-                          background: "rgba(255, 255, 255, 0.25)",
-                          fontSize: 11,
-                          fontWeight: 600,
-                          color: "#fff",
-                        }}
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35 }}
+                      className="px-2.5 py-1 rounded-full flex items-center gap-1"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.25)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: "#fff",
+                      }}
+                    >
+                      🗺️ 主题地图
+                    </motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4 }}
+                      className="px-2.5 py-1 rounded-full flex items-center gap-1"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.25)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: "#fff",
+                      }}
+                    >
+                      🎭 角色收集
+                    </motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.45 }}
+                      className="px-2.5 py-1 rounded-full flex items-center gap-1"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.25)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: "#fff",
+                      }}
+                    >
+                      ⭐ 三星评分
+                    </motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="px-2.5 py-1 rounded-full flex items-center gap-1"
+                      style={{
+                        background: "rgba(255, 255, 255, 0.25)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: "#fff",
+                      }}
+                    >
+                      🏆 成就解锁
+                    </motion.span>
                   </div>
                 </div>
               </motion.button>
@@ -726,7 +767,8 @@ export default function StartScreen({
                         color: "#7C3AED",
                       }}
                     >
-                      🎻 低音谱号
+                      <span className="inline-block mr-1">🎻</span>
+                      低音谱号
                     </span>
                   </div>
                 </div>
@@ -881,7 +923,7 @@ export default function StartScreen({
                     border: "2px solid rgba(255, 255, 255, 0.4)",
                   }}
                 >
-                  <span style={{ fontSize: 40 }}>🎻</span>
+                  <span style={{ fontSize: 40 }}>🎼</span>
                 </motion.div>
                 <div className="flex-1 min-w-0">
                   <div style={{ fontSize: 22, fontWeight: 800, color: "#fff", marginBottom: 4 }}>
@@ -1041,7 +1083,7 @@ export default function StartScreen({
                                   opacity: s <= stars ? 1 : 0.3,
                                 }}
                               >
-                                ⭐
+                                <span style={{ fontSize: 14, color: "#F59E0B" }}>⭐</span>
                               </motion.span>
                             ))}
                           </div>
@@ -1096,7 +1138,7 @@ export default function StartScreen({
                 }}
               >
                 <div className="flex items-start gap-3">
-                  <span style={{ fontSize: 24 }}>💡</span>
+                  <span style={{ fontSize: 24, color: "#92400E" }}>💡</span>
                   <div>
                     <div style={{ fontSize: 14, fontWeight: 700, color: "#92400E", marginBottom: 2 }}>
                       学习建议

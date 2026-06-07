@@ -445,7 +445,6 @@ export default function SightReadingModule({ onModuleChange }: Props) {
           } else if (q.noteId) {
             playNoteSound(q.noteId);
           }
-          playSuccessSound();
         } catch {
           // Sound failure is non-blocking
         }
@@ -536,14 +535,17 @@ export default function SightReadingModule({ onModuleChange }: Props) {
   // ── Render Results Screen ──
   if (phase === "results") {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-lg mx-auto min-h-screen flex flex-col items-center justify-center px-5 py-8 relative"
-        style={{
-          background: "linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%)",
-        }}
+      <div className="min-h-screen w-full flex items-center justify-center"
+        style={{ background: "linear-gradient(180deg, #F5F5F7 0%, #FFFFFF 100%)" }}
       >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-lg mx-auto min-h-screen flex flex-col items-center justify-center px-5 py-8 relative"
+          style={{
+            background: "linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%)",
+          }}
+        >
         {/* Celebration particles */}
         <AnimatePresence>
           {showCelebration && (
@@ -936,7 +938,8 @@ export default function SightReadingModule({ onModuleChange }: Props) {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+        </motion.div>
+      </div>
     );
   }
 

@@ -3,13 +3,8 @@ import * as Tone from "tone";
 /**
  * Piano-like audio engine using a carefully tuned Tone.js PolySynth.
  *
- * Instead of relying on external sample files (which can fail due to
- * CORS, CDN availability, or bandwidth), we emulate the piano timbre
- * through layered oscillators, per-note envelope shaping, low-pass
- * filtering, and warm room reverb.
- *
- * The result is a mellow, bell-like tone that reads as "piano-like"
- * without being harsh or synthetic-sounding.
+ * Strategy: Use soft triangle wave with gentle low-pass filtering
+ * and subtle reverb to create a mellow, piano-like tone.
  */
 export class PianoAudio {
   private pianoSynth: Tone.PolySynth | null = null;
@@ -32,54 +27,53 @@ export class PianoAudio {
         await Tone.start();
         console.log("PianoAudio: Tone.start() called");
 
-        // Warm reverb — small room, subtle
+        // Warm reverb — small room, very subtle
         this.reverb = new Tone.Reverb({
-          decay: 2.2,
-          preDelay: 0.015,
-          wet: 0.18,
+          decay: 1.8,
+          preDelay: 0.02,
+          wet: 0.15,
         }).toDestination();
         await this.reverb.generate();
 
-        // Gentle low-pass to round off the high end
+        // Gentle low-pass to round off harsh high-end
         this.lowPass = new Tone.Filter({
-          frequency: 5200,
-          Q: 0.4,
+          frequency: 4800,
+          Q: 0.3,
           type: "lowpass",
           rolloff: -12,
         }).connect(this.reverb);
 
-        // Piano-like polysynth
-        // - carrier: triangle for the warm string body
-        // - envelope: fast attack (hammer), medium decay, low sustain,
-        //   generous release (damper pedal effect)
+        // Soft piano-like polysynth
+        // Triangle wave for warm, mellow tone
         this.pianoSynth = new Tone.PolySynth(Tone.Synth, {
           oscillator: {
             type: "triangle",
+            detune: -5,
           },
           envelope: {
-            attack: 0.003,
-            decay: 1.2,
-            sustain: 0.08,
-            release: 1.8,
+            attack: 0.005,
+            decay: 1.4,
+            sustain: 0.06,
+            release: 2.0,
           },
         }).connect(this.lowPass);
-        this.pianoSynth.volume.value = -8;
+        this.pianoSynth.volume.value = -12;
         this.pianoSynth.maxPolyphony = 8;
 
-        // Feedback synth (used for correct/incorrect indicators)
+        // Feedback synth (soft sine wave)
         this.feedbackSynth = new Tone.Synth({
           oscillator: { type: "sine" },
           envelope: {
-            attack: 0.01,
-            decay: 0.35,
+            attack: 0.015,
+            decay: 0.4,
             sustain: 0.0,
-            release: 0.6,
+            release: 0.7,
           },
         }).connect(this.lowPass);
-        this.feedbackSynth.volume.value = -8;
+        this.feedbackSynth.volume.value = -12;
 
         this.started = true;
-        console.log("PianoAudio: initialized (tuned triangle synth)");
+        console.log("PianoAudio: initialized (soft triangle piano)");
       } catch (e) {
         console.warn("PianoAudio: init failed", e);
       }
